@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commissions by Hope | Custom Pet Portraits & Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --warm-beige: #F5E6D3;
+            --soft-terracotta: #E8A87C;
+            --deep-clay: #C38E70;
+            --charcoal: #3D3D3D;
+            --soft-sage: #A8B5A0;
+            --warm-shadow: rgba(195, 142, 112, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-beige) 100%);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(232, 168, 124, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 181, 160, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            color: var(--deep-clay);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--soft-terracotta);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            margin: 4rem 0;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--warm-shadow);
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--deep-clay);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--soft-terracotta), transparent);
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--warm-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: white;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 12px 40px rgba(195, 142, 112, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            padding: 1.2rem;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), white);
+            text-align: center;
+            font-style: italic;
+            color: var(--deep-clay);
+        }
+
+        /* Bio Section */
+        .bio-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .bio-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Pricing Table */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .price-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--warm-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(195, 142, 112, 0.25);
+            border-color: var(--soft-terracotta);
+        }
+
+        .price-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--deep-clay);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card .size {
+            color: var(--soft-terracotta);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin: 1rem 0;
+        }
+
+        .price-card .features {
+            list-style: none;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .price-card .features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .price-card .features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--soft-terracotta);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 700px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .contact-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--soft-terracotta), var(--deep-clay));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px var(--warm-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Lora', serif;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(195, 142, 112, 0.4);
+        }
+
+        .disclaimer {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(168, 181, 160, 0.1);
+            border-left: 4px solid var(--soft-sage);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--deep-clay);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 2rem 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Commissions by Hope</h1>
+        <p class="subtitle">Custom Pet Portraits & Artistic Creations</p>
+    </header>
+
+    <div class="container">
+        <!-- Portfolio Gallery -->
+        <section>
+            <h2>Portfolio</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/Luna.png" alt="Luna - Memorial Pet Portrait">
+                    <div class="gallery-caption">Luna - A Cherished Memorial</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Maggie.png" alt="Maggie - Gift Memorial Portrait">
+                    <div class="gallery-caption">Maggie - A Heartfelt Gift</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Ray.png" alt="Ray - Cat Portrait">
+                    <div class="gallery-caption">Ray - A Beloved Companion</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Hope -->
+        <section>
+            <h2>About Hope</h2>
+            <div class="bio-content">
+                <p>Hope Rowe is a talented artist who loves drawing, painting, and gel printing.</p>
+                <p>Hope loves to share her talents with the world and would love to paint something special for you.</p>
+                <p>While she has painted numerous portraits of pets, she is open to attempting anything as long as you have a reference photo to use.</p>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section>
+            <h2>Commission Pricing</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Small</h3>
+                    <div class="size">8" × 10"</div>
+                    <div class="price">$75</div>
+                    <ul class="features">
+                        <li>Perfect for desk or shelf display</li>
+                        <li>Single subject portraits</li>
+                        <li>Choice of medium</li>
+                        <li>High-quality materials</li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <h3>Medium</h3>
+                    <div class="size">11" × 14"</div>
+                    <div class="price">$125</div>
+                    <ul class="features">
+                        <li>Ideal for wall display</li>
+                        <li>Single or duo subjects</li>
+                        <li>Enhanced detail work</li>
+                        <li>Choice of medium</li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <h3>Large</h3>
+                    <div class="size">16" × 20"</div>
+                    <div class="price">$200</div>
+                    <ul class="features">
+                        <li>Statement piece sizing</li>
+                        <li>Multiple subjects welcome</li>
+                        <li>Premium detail & depth</li>
+                        <li>Choice of medium</li>
+                    </ul>
+                </div>
+                <div class="price-card">
+                    <h3>Extra Large</h3>
+                    <div class="size">18" × 24" or larger</div>
+                    <div class="price">$275+</div>
+                    <ul class="features">
+                        <li>Gallery-worthy artwork</li>
+                        <li>Complex compositions</li>
+                        <li>Exceptional detail</li>
+                        <li>Custom pricing for larger sizes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section>
+            <h2>Commission Your Portrait</h2>
+            <div class="contact-content">
+                <p>Ready to immortalize your beloved pet or bring your artistic vision to life? Hope would love to create something meaningful for you.</p>
+                <a href="mailto:HRowe2008@icloud.com?subject=Art Commission Inquiry&body=Hi Hope,%0D%0A%0D%0AI'm interested in commissioning a custom portrait. Here are the details:%0D%0A%0D%0ASubject of Portrait: [Describe who/what you'd like painted]%0D%0A%0D%0APreferred Size: [Small (8x10), Medium (11x14), Large (16x20), Extra Large (18x24+)]%0D%0A%0D%0APreferred Medium: [Acrylic, Watercolor, Oil, Other - please specify]%0D%0A%0D%0ASpecial Requests or Details: [Any specific colors, backgrounds, poses, or details you'd like included]%0D%0A%0D%0AReference Photo: [I will attach a reference photo to this email]%0D%0A%0D%0ATimeline: [When would you ideally like to receive the finished piece?]%0D%0A%0D%0AThank you!%0D%0A[Your Name]" class="contact-button">
+                    Contact Hope
+                </a>
+                <div class="disclaimer">
+                    <strong>Please note:</strong> Commission timing is based on the artist's availability and current project queue. Hope will work with you to establish a realistic timeline for your custom piece. Rush orders may be accommodated when possible.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Commissions by Hope. All artwork © Hope Rowe.</p>
+    </footer>
+</body>
+</html>
